@@ -158,7 +158,7 @@ void Logcat::ProcessBuffer(struct log_msg *buf) {
         shortcut = true;
     }
     if (verbose_ && (shortcut || buf->id() == log_id::LOG_ID_CRASH ||
-                     entry.pid == my_pid_ || tag == "Magisk"sv ||
+                     entry.pid == my_pid_ || tag == "Magisk"sv || tag == "am_crash"sv ||
                      tag.starts_with("Riru"sv) ||
                      tag.starts_with("LSPosed"sv))) [[unlikely]] {
         verbose_print_count_ += PrintLogLine(entry, verbose_file_.get());
@@ -188,7 +188,7 @@ void Logcat::Run() {
                 android_logger_list_alloc(0, tail, 0), &android_logger_list_free};
         tail = tail_after_crash;
 
-        for (log_id id:{LOG_ID_MAIN, LOG_ID_CRASH}) {
+        for (log_id id:{LOG_ID_MAIN, LOG_ID_CRASH, LOG_ID_EVENTS}) {
             auto *logger = android_logger_open(logger_list.get(), id);
             if (logger == nullptr) continue;
             if (auto size = android_logger_get_log_size(logger);
