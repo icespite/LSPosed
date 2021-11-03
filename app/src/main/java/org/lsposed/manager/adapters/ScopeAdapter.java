@@ -159,31 +159,31 @@ public class ScopeAdapter extends RecyclerView.Adapter<ScopeAdapter.ViewHolder> 
         if (info.packageName.equals("android")) {
             return false;
         }
-        if (checkedList.contains(app)) {
-            return false;
-        }
-        if (preferences.getBoolean("filter_denylist", false)) {
-            if (denyList.contains(info.packageName)) {
-                return true;
-            }
-        }
-        if (preferences.getBoolean("filter_modules", true)) {
-            if (info.applicationInfo.metaData != null && info.applicationInfo.metaData.containsKey("xposedminversion")) {
-                return true;
-            }
-        }
-        if (preferences.getBoolean("filter_games", true)) {
-            if (info.applicationInfo.category == ApplicationInfo.CATEGORY_GAME) {
-                return true;
-            }
-            //noinspection deprecation
-            if ((info.applicationInfo.flags & ApplicationInfo.FLAG_IS_GAME) != 0) {
-                return true;
-            }
-        }
-        if ((info.applicationInfo.flags & ApplicationInfo.FLAG_HAS_CODE) == 0) {
-            return true;
-        }
+        // if (checkedList.contains(app)) {
+        //     return false;
+        // }
+        // if (preferences.getBoolean("filter_denylist", false)) {
+        //     if (denyList.contains(info.packageName)) {
+        //         return true;
+        //     }
+        // }
+        // if (preferences.getBoolean("filter_modules", true)) {
+        //     if (info.applicationInfo.metaData != null && info.applicationInfo.metaData.containsKey("xposedminversion")) {
+        //         return true;
+        //     }
+        // }
+        // if (preferences.getBoolean("filter_games", true)) {
+        //     if (info.applicationInfo.category == ApplicationInfo.CATEGORY_GAME) {
+        //         return true;
+        //     }
+        //     //noinspection deprecation
+        //     if ((info.applicationInfo.flags & ApplicationInfo.FLAG_IS_GAME) != 0) {
+        //         return true;
+        //     }
+        // }
+        // if ((info.applicationInfo.flags & ApplicationInfo.FLAG_HAS_CODE) == 0) {
+        //     return true;
+        // }
         return preferences.getBoolean("filter_system_apps", true) && (info.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
     }
 
