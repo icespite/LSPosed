@@ -157,7 +157,8 @@
     <string name="pure_black_dark_theme_summary">當深色主題啟用時使用純黑色主題</string>
     <string name="settings_group_theme">主題</string>
     <string name="settings_backup_and_restore">備份與還原</string>
-    <string name="settings_backup_and_restore_summery">備份或還原模組列表和範圍清單。</string>
+    <string name="settings_backup_summery">備份模組列表和範圍清單</string>
+    <string name="settings_restore_summery">還原模組列表和範圍清單</string>
     <string name="settings_backup">備份</string>
     <string name="settings_backup_failed2">備份失敗：\n%s</string>
     <string name="settings_restore">還原</string>
@@ -194,8 +195,6 @@
     <string name="module_release_no_more">沒有更舊的版本</string>
     <string name="repo_load_failed">模組倉庫載入失敗：%s</string>
     <!-- CrashReportActivity -->
-    <string name="outdated_core">LSPosed 管理器的版本高於框架，請更新 LSPosed 框架。</string>
-    <string name="outdated_manager">LSPosed 框架的版本高於應用程式，請從 /data/adb/lspd/manager.apk 更新 LSPosed 應用程式。</string>
     <string name="manager_crashed">應用程式出現未知錯誤</string>
     <string name="manager_crashed_info">回報給 </string>
     <string name="send_crash_info">傳送錯誤日誌</string>

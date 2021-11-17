@@ -157,7 +157,8 @@
     <string name="pure_black_dark_theme_summary">Sử dụng chủ đề đen nếu chủ đề tối được bật</string>
     <string name="settings_group_theme">Chủ đề</string>
     <string name="settings_backup_and_restore">Sao lưu và khôi phục</string>
-    <string name="settings_backup_and_restore_summery">Sao lưu hoặc khôi phục danh sách mô-đun và danh sách phạm vi ứng dụng.</string>
+    <string name="settings_backup_summery">Sao lưu danh sách mô-đun và phạm vi ứng dụng.</string>
+    <string name="settings_restore_summery">Khôi phục danh sách mô-đun và phạm vi ứng dụng.</string>
     <string name="settings_backup">Sao lưu</string>
     <string name="settings_backup_failed2">Sao lưu thất bại:\n%s</string>
     <string name="settings_restore">Phục hồi</string>
@@ -194,8 +195,7 @@
     <string name="module_release_no_more">Không có phiên bản nào</string>
     <string name="repo_load_failed">Tải kho lưu trữ mô-đun thất bại: %s</string>
     <!-- CrashReportActivity -->
-    <string name="outdated_core">Ứng dụng LSPosed đang mới hơn framework. Xin hãy cập nhật LSPosed framework.</string>
-    <string name="outdated_manager">LSPosed framework đang mới hơn phiên bản ứng dụng quản lý. Xin hãy cập nhật ứng dụng tại /data/adb/lspd/manager.apk thủ công.</string>
+    <string name="version_mismatch">Phiên bản của LSPosed framework (%1$d) không trùng khớp với phiên bản quản lý (%2$d). Hãy cài đặt lại LSPosed.</string>
     <string name="manager_crashed">Trình quản lí gặp sự cố</string>
     <string name="manager_crashed_info">báo cáo đến </string>
     <string name="send_crash_info">Gửi thông tin sự cố</string>

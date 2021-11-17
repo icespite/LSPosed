@@ -168,7 +168,7 @@ android {
 dependencies {
     // keep this dep since it affects ccache
     implementation("dev.rikka.ndk:riru:26.0.0")
-    implementation("dev.rikka.ndk.thirdparty:cxx:1.1.0")
+    implementation("dev.rikka.ndk.thirdparty:cxx:1.2.0")
     implementation("io.github.vvb2060.ndk:dobby:1.2")
     implementation("com.android.tools.build:apksig:$agpVersion")
     implementation("org.apache.commons:commons-lang3:3.12.0")
@@ -394,8 +394,8 @@ val pushApk = task("pushApk", Exec::class) {
 val openApp = task("openApp", Exec::class) {
     commandLine(
         adb, "shell", "am start -a android.intent.action.MAIN " +
-                "-c org.lsposed.manager.LAUNCH_MANAGER  " +
-                "com.android.shell/.BugreportWarningActivity"
+        "-c org.lsposed.manager.LAUNCH_MANAGER  " +
+        "com.android.shell/.BugreportWarningActivity"
     )
 }
 task("reRunApp", Exec::class) {

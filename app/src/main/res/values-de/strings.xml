@@ -153,7 +153,6 @@ Gerät wird nach dem Update neu gestartet</string>
     <string name="pure_black_dark_theme_summary">Das schwarze Thema verwenden, wenn dunkles Thema aktiviert ist</string>
     <string name="settings_group_theme">Thema</string>
     <string name="settings_backup_and_restore">Sichern und Wiederherstellen</string>
-    <string name="settings_backup_and_restore_summery">Modul- und Bereichslisten sichern oder wiederherstellen.</string>
     <string name="settings_backup">Back-up</string>
     <string name="settings_backup_failed2">Sicherung fehlgeschlagen:\n%s</string>
     <string name="settings_restore">Wiederherstellen</string>
@@ -190,8 +189,6 @@ Gerät wird nach dem Update neu gestartet</string>
     <string name="module_release_no_more">Keine Veröffentlichung mehr</string>
     <string name="repo_load_failed">Fehler beim Laden der Modulrepo: %s</string>
     <!-- CrashReportActivity -->
-    <string name="outdated_core">Die LSPosed-App ist neuer als das Framework. Bitte aktualisieren Sie das LSPosed-Framework.</string>
-    <string name="outdated_manager">Die Version von LSPosed Manager und LSPosed Core stimmen nicht überein. Installieren Sie die entsprechende Version neu.</string>
     <string name="manager_crashed">Manager abgestürzt</string>
     <string name="manager_crashed_info">melde dies an </string>
     <string name="send_crash_info">Absturzinfo senden</string>
