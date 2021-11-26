@@ -23,25 +23,21 @@ package org.lsposed.manager.ui.activity.base;
 import android.app.ActivityManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Window;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
 import com.google.android.material.color.DynamicColors;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
-import org.lsposed.manager.App;
 import org.lsposed.manager.BuildConfig;
 import org.lsposed.manager.ConfigManager;
 import org.lsposed.manager.R;
+import org.lsposed.manager.ui.dialog.BlurBehindDialogBuilder;
 import org.lsposed.manager.ui.dialog.FlashDialogBuilder;
 import org.lsposed.manager.util.NavUtil;
 import org.lsposed.manager.util.ThemeUtil;
@@ -51,6 +47,8 @@ import rikka.core.util.ResourceUtils;
 import rikka.material.app.MaterialActivity;
 
 public class BaseActivity extends MaterialActivity {
+
+    private static Bitmap icon = null;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,7 +61,7 @@ public class BaseActivity extends MaterialActivity {
         if (!ConfigManager.isBinderAlive()) return;
         var version = ConfigManager.getXposedVersionCode();
         if (BuildConfig.VERSION_CODE == version) return;
-        new MaterialAlertDialogBuilder(this)
+        new BlurBehindDialogBuilder(this)
                 .setMessage(getString(R.string.version_mismatch, version, BuildConfig.VERSION_CODE))
                 .setPositiveButton(android.R.string.ok, (dialog, id) -> {
                     if (UpdateUtil.canInstall()) {
@@ -83,28 +81,18 @@ public class BaseActivity extends MaterialActivity {
         for (var task : getSystemService(ActivityManager.class).getAppTasks()) {
             task.setExcludeFromRecents(false);
         }
-        Bitmap icon;
-        try {
-            var res = getResources().getDrawable(R.mipmap.ic_launcher, getTheme());
-            var size = getResources().getDimensionPixelSize(
-                    android.R.dimen.app_icon_size);
-            var tmp = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
-            res.setBounds(new Rect(0, 0, size, size));
-            Canvas c = new Canvas(tmp);
-            res.draw(c);
-            var drawable = RoundedBitmapDrawableFactory.create(getResources(), tmp);
-            drawable.setBounds(new Rect(0, 0, size, size));
-            icon = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
-            c = new Canvas(icon);
-            drawable.setCircular(true);
-            drawable.draw(c);
-            tmp.recycle();
-        } catch (Throwable e) {
-            Log.w(App.TAG, "load icon", e);
-            icon = BitmapFactory.decodeResource(Resources.getSystem(), android.R.drawable.ic_dialog_info);
+        if (icon == null) {
+            var drawable = getApplicationInfo().loadIcon(getPackageManager());
+            if (drawable instanceof BitmapDrawable) {
+                icon = ((BitmapDrawable) drawable).getBitmap();
+            } else {
+                icon = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+                final Canvas canvas = new Canvas(icon);
+                drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+                drawable.draw(canvas);
+            }
         }
-        setTaskDescription(new ActivityManager.TaskDescription(getResources().getString(R.string.app_name), icon));
-        icon.recycle();
+        setTaskDescription(new ActivityManager.TaskDescription(getTitle().toString(), icon));
     }
 
     @Override
