@@ -711,8 +711,9 @@ public class ConfigManager {
         }
     }
 
-    public boolean setModuleScope(String packageName, List<Application> scopes) {
+    public boolean setModuleScope(String packageName, List<Application> scopes) throws RemoteException {
         if (scopes == null) return false;
+        enableModule(packageName);
         int mid = getModuleId(packageName);
         if (mid == -1) return false;
         Application self = new Application();
@@ -809,8 +810,12 @@ public class ConfigManager {
         }
     }
 
-    public boolean enableModule(String packageName, ApplicationInfo info) {
-        if (packageName.equals("lspd") || !updateModuleApkPath(packageName, getModuleApkPath(info), false))
+    public boolean enableModule(String packageName) throws RemoteException {
+        PackageInfo pkgInfo = PackageService.getPackageInfo(packageName, PackageService.MATCH_ALL_FLAGS, 0);
+        if (pkgInfo == null || pkgInfo.applicationInfo == null) {
+            return false;
+        }
+        if (packageName.equals("lspd") || !updateModuleApkPath(packageName, getModuleApkPath(pkgInfo.applicationInfo), false))
             return false;
         boolean changed = executeInTransaction(() -> {
             ContentValues values = new ContentValues();
